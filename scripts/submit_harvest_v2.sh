@@ -1,0 +1,38 @@
+#!/bin/bash
+#SBATCH --job-name=manifold-harvest-v2
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --gpus-per-node=2
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --time=01:00:00
+#SBATCH --output=/home/rkathuria/manifolds/logs/harvest-v2-%j.out
+#SBATCH --error=/home/rkathuria/manifolds/logs/harvest-v2-%j.err
+
+set -euo pipefail
+
+REPO=/home/rkathuria/activation-harvester
+PROJ=/home/rkathuria/manifolds
+OUT=/data/artifacts/rohan/manifolds/concepts_olmo31_32b_v2
+mkdir -p "$PROJ/logs" "$OUT"
+
+PY=$REPO/.venv/bin/python
+
+export HF_HOME=/data/artifacts/rohan/santi/hf_cache
+export HF_HUB_CACHE=/data/artifacts/rohan/santi/hf_cache/hub
+
+cd "$REPO"
+
+"$PY" scripts/extract_sglang.py \
+    --model allenai/Olmo-3.1-32B-Think \
+    --layers 16,24,32,40,48,56 \
+    --prompts $PROJ/data/prompts_v2.jsonl \
+    --completions $PROJ/data/completions_v2.jsonl.zst \
+    --completion-idx 0 \
+    --output-dir "$OUT" \
+    --max-tokens 256 \
+    --tp-size 2 \
+    --chunked-prefill-size 16384 \
+    --max-running-requests 32
+
+"$PY" scripts/verify.py "$OUT" || true

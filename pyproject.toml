@@ -1,0 +1,19 @@
+[project]
+name = "manifolds"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.10.9",
+    "ml-dtypes>=0.5.4",
+    "numpy>=2.4.4",
+    "persim>=0.3.8",
+    "plotly>=6.7.0",
+    "ripser>=0.6.14",
+    "scikit-learn>=1.8.0",
+    "scipy>=1.17.1",
+    "transformers>=4.45",
+    "umap-learn>=0.5.12",
+    "zstandard>=0.25.0",
+]

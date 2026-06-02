@@ -7,13 +7,13 @@ score. For a chosen family it:
   - loads last-token activations for that family from a harvested shard,
   - computes a PCA top-3 basis and a SAVE top-3 basis (probe = c_last - c_first
     along the canonical concept order),
-  - overlays the per-concept centroids and the linear / paper-spline / SAVE-arc
-    steering paths,
-  - writes <fam>_pca.html, <fam>_save.html and <fam>_combined.html.
+  - renders ONE clean Plotly figure with two side-by-side 3D scenes
+    ("PCA (paper version)" | "SAVE estimation"), each independently rotatable,
+  - writes <fam>_3d_L<layer>.html.
 
-IMPORTANT: HTML is written with include_plotlyjs=True (plotly.js embedded inline)
-so the files are fully self-contained and render offline / off-cluster — no
-cdn.plot.ly dependency.
+The single figure is the blog-embeddable deliverable: just the two 3D views and
+a title above each. HTML embeds plotly.js inline (include_plotlyjs=True) so it
+is fully self-contained and renders offline / off-cluster.
 """
 from __future__ import annotations
 
@@ -23,11 +23,15 @@ from pathlib import Path
 
 import numpy as np
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 from scipy.interpolate import CubicSpline
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "analysis"))
 from load_acts import load_labels, read_last_token_per_seq
 from save_recovery import save_recovery
+
+PCA_TITLE = "PCA (paper version)"
+SAVE_TITLE = "SAVE estimation"
 
 # Canonical order per family (defines the ordinal axis + the SAVE probe endpoints).
 FAMILY_ORDER = {
@@ -35,7 +39,7 @@ FAMILY_ORDER = {
                 "Saturday", "Sunday"],
     "month": ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"],
-    "letter": [chr(c) for c in range(ord("C"), ord("Z") + 1)],   # C..Z (paper)
+    "letter": [chr(c) for c in range(ord("C"), ord("Z") + 1)],   # C..Z  (paper)
     "age": [str(a) for a in range(1, 100)],                       # 1..99 (paper)
 }
 
@@ -67,39 +71,36 @@ def project(X, basis):
     return X @ basis
 
 
-def make_3d_plot(coords, cidx, centroid_coords, paths_3d, title, order, cbar_title):
-    fig = go.Figure()
-    n = len(order)
-    label_centroids = n <= 14  # don't clutter 99-age plots with text labels
+PATH_COLORS = {"linear": "#1f77b4", "paper": "#ff7f0e", "save_arc": "#2ca02c"}
 
+
+def add_manifold(fig, row, col, proj, cidx, order, cbar, show_colorbar, show_legend):
+    """Add the point cloud + centroids + steering paths to one subplot scene."""
+    n = len(order)
+    label_centroids = n <= 14   # don't clutter 99-age plots with text labels
     fig.add_trace(go.Scatter3d(
-        x=coords[:, 0], y=coords[:, 1], z=coords[:, 2], mode="markers",
-        marker=dict(size=2.5, color=cidx, colorscale="Viridis", opacity=0.45,
-                    showscale=True, colorbar=dict(title=cbar_title, thickness=10)),
-        text=[f"{cbar_title}={order[i]}" for i in cidx], hovertemplate="%{text}",
-        name="points",
-    ))
+        x=proj["X"][:, 0], y=proj["X"][:, 1], z=proj["X"][:, 2], mode="markers",
+        marker=dict(size=2.5, color=cidx, colorscale="Viridis", opacity=0.5,
+                    showscale=show_colorbar,
+                    colorbar=dict(title=cbar, thickness=12, x=1.0, len=0.85)),
+        text=[f"{cbar}={order[i]}" for i in cidx],
+        hovertemplate="%{text}<extra></extra>",
+        name="points", showlegend=False,
+    ), row=row, col=col)
     fig.add_trace(go.Scatter3d(
-        x=centroid_coords[:, 0], y=centroid_coords[:, 1], z=centroid_coords[:, 2],
+        x=proj["C"][:, 0], y=proj["C"][:, 1], z=proj["C"][:, 2],
         mode="markers+text" if label_centroids else "markers",
-        marker=dict(size=9, color=list(range(n)), colorscale="Viridis",
+        marker=dict(size=8, color=list(range(n)), colorscale="Viridis",
                     line=dict(color="black", width=2), opacity=1.0),
         text=[str(o) for o in order] if label_centroids else None,
-        textposition="top center", name="centroids",
-    ))
-    colors = {"linear": "#1f77b4", "paper": "#ff7f0e", "save_arc": "#2ca02c"}
-    for method, p in paths_3d.items():
+        textposition="top center", name="centroids", showlegend=False,
+    ), row=row, col=col)
+    for method, p in proj["paths"].items():
         fig.add_trace(go.Scatter3d(
             x=p[:, 0], y=p[:, 1], z=p[:, 2], mode="lines",
-            line=dict(color=colors[method], width=6), name=method,
-        ))
-    fig.update_layout(
-        title=title,
-        scene=dict(xaxis_title="dim 1", yaxis_title="dim 2", zaxis_title="dim 3",
-                   aspectmode="data"),
-        width=900, height=720, legend=dict(x=0.02, y=0.95),
-    )
-    return fig
+            line=dict(color=PATH_COLORS[method], width=6),
+            name=method, legendgroup=method, showlegend=show_legend,
+        ), row=row, col=col)
 
 
 def main():
@@ -128,11 +129,10 @@ def main():
         raise SystemExit(f"no rows for family={args.family!r} in {args.labels}")
     X = X[keep].astype(np.float64)
     cidx = np.array([idx_of[str(labels[pids[i]]["concept"])] for i in keep])
-    present = sorted(set(cidx.tolist()))
     print(f"loaded {X.shape[0]} '{args.family}' acts at L{args.layer}, dim={X.shape[1]}")
-    print(f"  {len(present)}/{len(order)} concepts present")
 
-    # Centroids in canonical order (skip any concept with no samples).
+    # Centroids in canonical order (skip any concept with no samples), with a
+    # dense color remap so the colorscale spans exactly the present concepts.
     used_order, centroids = [], []
     for k in range(len(order)):
         m = cidx == k
@@ -141,9 +141,9 @@ def main():
         used_order.append(order[k])
         centroids.append(X[m].mean(0))
     centroids = np.stack(centroids)
-    # remap colors to dense 0..len(used_order)-1 so colorscale spans the data
     remap = {idx_of[o]: j for j, o in enumerate(used_order)}
     cidx_dense = np.array([remap[c] for c in cidx])
+    print(f"  {len(used_order)}/{len(order)} concepts present")
 
     Xc = X - X.mean(0, keepdims=True)
     print(f"  chord ||c_last - c_first|| = {np.linalg.norm(centroids[-1]-centroids[0]):.2f}")
@@ -166,41 +166,31 @@ def main():
                           paths={m: project(p, B) for m, p in paths.items()})
     P, Sv = proj(pca_basis), proj(save_basis)
 
-    fam_label = args.family.capitalize()
-    fig_pca = make_3d_plot(P["X"], cidx_dense, P["C"], P["paths"],
-                           f"PCA top-3 (var={pca_var.sum():.2%}) — L{args.layer} {fam_label}",
-                           used_order, cbar)
-    fig_save = make_3d_plot(Sv["X"], cidx_dense, Sv["C"], Sv["paths"],
-                            f"SAVE top-3 (probe=c_last−c_first) — L{args.layer} {fam_label}",
-                            used_order, cbar)
+    # One figure, two independently-rotatable 3D scenes, title above each.
+    fig = make_subplots(
+        rows=1, cols=2, horizontal_spacing=0.02,
+        specs=[[{"type": "scene"}, {"type": "scene"}]],
+        subplot_titles=(PCA_TITLE, SAVE_TITLE),
+    )
+    add_manifold(fig, 1, 1, P, cidx_dense, used_order, cbar,
+                 show_colorbar=False, show_legend=True)
+    add_manifold(fig, 1, 2, Sv, cidx_dense, used_order, cbar,
+                 show_colorbar=True, show_legend=False)
+    scene_opts = dict(xaxis_title="dim 1", yaxis_title="dim 2",
+                      zaxis_title="dim 3", aspectmode="data")
+    fig.update_layout(
+        scene=scene_opts, scene2=scene_opts,
+        width=1400, height=680, margin=dict(l=0, r=0, t=40, b=0),
+        legend=dict(orientation="h", x=0.5, xanchor="center", y=0,
+                    yanchor="top"),
+    )
+    # Make the two subplot titles a touch larger / cleaner for a blog.
+    for ann in fig.layout.annotations:
+        ann.font = dict(size=18)
 
-    pca_path = args.out_dir / f"{args.family}_3d_L{args.layer}_pca.html"
-    save_path = args.out_dir / f"{args.family}_3d_L{args.layer}_save.html"
-    # include_plotlyjs=True embeds plotly.js inline -> fully offline-capable.
-    fig_pca.write_html(pca_path, include_plotlyjs=True)
-    fig_save.write_html(save_path, include_plotlyjs=True)
-    print(f"wrote {pca_path}")
-    print(f"wrote {save_path}")
-
-    combined_path = args.out_dir / f"{args.family}_3d_L{args.layer}_combined.html"
-    pca_html = fig_pca.to_html(include_plotlyjs=True, full_html=False)
-    save_html = fig_save.to_html(include_plotlyjs=False, full_html=False)
-    combined_path.write_text(f"""<!doctype html><html><head>
-<meta charset="utf-8"/><title>{fam_label} 3D manifold L{args.layer}</title>
-<style>body {{ font-family: sans-serif; margin: 20px; }} h2 {{ margin-top: 30px; }}</style>
-</head><body>
-<h1>{fam_label} manifold — PCA vs SAVE — OLMo-3.1-Think-32B, L{args.layer}</h1>
-<p><b>Setup:</b> {X.shape[0]} '{args.family}' prompts, {len(used_order)} concepts
-({used_order[0]} → {used_order[-1]}). Paths overlaid:
-<span style='color:#1f77b4'><b>linear</b></span> chord,
-<span style='color:#ff7f0e'><b>paper-spline</b></span>,
-<span style='color:#2ca02c'><b>SAVE-arc</b></span>. Self-contained (plotly.js embedded).</p>
-<h2>PCA top-3</h2>
-{pca_html}
-<h2>SAVE top-3</h2>
-{save_html}
-</body></html>""")
-    print(f"wrote {combined_path}")
+    out = args.out_dir / f"{args.family}_3d_L{args.layer}.html"
+    fig.write_html(out, include_plotlyjs=True)   # embedded -> offline-capable
+    print(f"wrote {out}")
 
 
 if __name__ == "__main__":

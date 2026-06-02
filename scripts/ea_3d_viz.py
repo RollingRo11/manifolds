@@ -57,48 +57,35 @@ def project(X, basis):
     return X @ basis
 
 
-def make_3d_plot(coords, fs, centroid_coords, paths_3d, title):
-    """Single 3D scatter+lines figure."""
-    fig = go.Figure()
+PCA_TITLE = "PCA (paper version)"
+SAVE_TITLE = "SAVE estimation"
+PATH_COLORS = {"linear": "#1f77b4", "paper": "#ff7f0e", "save_arc": "#2ca02c"}
 
-    fig.add_trace(go.Scatter3d(
-        x=coords[:, 0], y=coords[:, 1], z=coords[:, 2],
-        mode="markers",
-        marker=dict(size=2.5, color=fs, colorscale="Viridis", opacity=0.45,
-                     showscale=True, colorbar=dict(title="FS", thickness=10)),
-        text=[f"FS={f}" for f in fs], hovertemplate="%{text}",
-        name="points",
-    ))
 
+def add_manifold(fig, row, col, proj, fs, show_colorbar, show_legend):
+    """Add the FS point cloud + centroids + steering paths to one subplot scene."""
     fig.add_trace(go.Scatter3d(
-        x=centroid_coords[:, 0], y=centroid_coords[:, 1], z=centroid_coords[:, 2],
+        x=proj["X"][:, 0], y=proj["X"][:, 1], z=proj["X"][:, 2], mode="markers",
+        marker=dict(size=2.5, color=fs, colorscale="Viridis", opacity=0.5,
+                    showscale=show_colorbar,
+                    colorbar=dict(title="FS", thickness=12, x=1.0, len=0.85)),
+        text=[f"FS={f}" for f in fs], hovertemplate="%{text}<extra></extra>",
+        name="points", showlegend=False,
+    ), row=row, col=col)
+    fig.add_trace(go.Scatter3d(
+        x=proj["C"][:, 0], y=proj["C"][:, 1], z=proj["C"][:, 2],
         mode="markers+text",
-        marker=dict(size=10, color=list(range(7)), colorscale="Viridis",
-                     line=dict(color="black", width=2), opacity=1.0),
-        text=[f"FS={k}" for k in range(7)],
-        textposition="top center",
-        name="centroids",
-    ))
-
-    colors = {"linear": "#1f77b4", "paper": "#ff7f0e", "save_arc": "#2ca02c"}
-    for method, p in paths_3d.items():
+        marker=dict(size=8, color=list(range(7)), colorscale="Viridis",
+                    line=dict(color="black", width=2), opacity=1.0),
+        text=[f"FS={k}" for k in range(7)], textposition="top center",
+        name="centroids", showlegend=False,
+    ), row=row, col=col)
+    for method, p in proj["paths"].items():
         fig.add_trace(go.Scatter3d(
-            x=p[:, 0], y=p[:, 1], z=p[:, 2],
-            mode="lines",
-            line=dict(color=colors[method], width=6),
-            name=method,
-        ))
-
-    fig.update_layout(
-        title=title,
-        scene=dict(
-            xaxis_title="dim 1", yaxis_title="dim 2", zaxis_title="dim 3",
-            aspectmode="data",
-        ),
-        width=900, height=720,
-        legend=dict(x=0.02, y=0.95),
-    )
-    return fig
+            x=p[:, 0], y=p[:, 1], z=p[:, 2], mode="lines",
+            line=dict(color=PATH_COLORS[method], width=6),
+            name=method, legendgroup=method, showlegend=show_legend,
+        ), row=row, col=col)
 
 
 def main():
@@ -145,42 +132,27 @@ def main():
         "paths": {m: project(p, save_basis) for m, p in paths.items()},
     }
 
-    fig_pca = make_3d_plot(proj_PCA["X"], fs, proj_PCA["C"], proj_PCA["paths"],
-                            f"PCA top-3 (var={pca_var.sum():.2%}) — L{LAYER} EA")
-    fig_save = make_3d_plot(proj_SAVE["X"], fs, proj_SAVE["C"], proj_SAVE["paths"],
-                             f"SAVE top-3 (probe=c_FS6−c_FS0) — L{LAYER} EA")
+    # One figure, two independently-rotatable 3D scenes, title above each.
+    fig = make_subplots(
+        rows=1, cols=2, horizontal_spacing=0.02,
+        specs=[[{"type": "scene"}, {"type": "scene"}]],
+        subplot_titles=(PCA_TITLE, SAVE_TITLE),
+    )
+    add_manifold(fig, 1, 1, proj_PCA, fs, show_colorbar=False, show_legend=True)
+    add_manifold(fig, 1, 2, proj_SAVE, fs, show_colorbar=True, show_legend=False)
+    scene_opts = dict(xaxis_title="dim 1", yaxis_title="dim 2",
+                      zaxis_title="dim 3", aspectmode="data")
+    fig.update_layout(
+        scene=scene_opts, scene2=scene_opts,
+        width=1400, height=680, margin=dict(l=0, r=0, t=40, b=0),
+        legend=dict(orientation="h", x=0.5, xanchor="center", y=0, yanchor="top"),
+    )
+    for ann in fig.layout.annotations:
+        ann.font = dict(size=18)
 
-    pca_path = out_dir / f"ea_3d_L{LAYER}_pca.html"
-    save_path = out_dir / f"ea_3d_L{LAYER}_save.html"
-    # include_plotlyjs=True embeds plotly.js inline -> self-contained / offline.
-    fig_pca.write_html(pca_path, include_plotlyjs=True)
-    fig_save.write_html(save_path, include_plotlyjs=True)
-    print(f"\nwrote {pca_path}")
-    print(f"wrote {save_path}")
-
-    combined_path = out_dir / f"ea_3d_L{LAYER}_combined.html"
-    pca_html = fig_pca.to_html(include_plotlyjs=True, full_html=False)
-    save_html = fig_save.to_html(include_plotlyjs=False, full_html=False)
-    combined_path.write_text(f"""<!doctype html><html><head>
-<title>EA 3D manifold L{LAYER}</title>
-<style>body {{ font-family: sans-serif; margin: 20px; }} h2 {{ margin-top: 30px; }}</style>
-</head><body>
-<h1>EA manifold visualization — OLMo-3.1-Think-32B, L{LAYER}, position_from_end={POSITION_FROM_END}</h1>
-<p><b>Setup:</b> {X.shape[0]} EA prompts, FS=0 (conversational) → FS=6 (evaluation), 7 centroids.
-Three steering paths overlaid: <span style='color:#1f77b4'><b>linear</b></span> chord,
-<span style='color:#ff7f0e'><b>paper-spline</b></span> (cubic spline through 7 centroids),
-<span style='color:#2ca02c'><b>SAVE-arc</b></span> (piecewise-linear through centroids in FS order).</p>
-<h2>SAVE top-3 projection</h2>
-<p>SAVE basis is anchored on the FS-difference probe direction. This is the basis we extract
-the manifold structure from. If the manifold is meaningful, FS gradient should be visible
-as a clean trajectory.</p>
-{save_html}
-<h2>PCA top-3 projection</h2>
-<p>PCA captures the largest ambient variance directions. The FS structure may be obscured
-by other variance (prompt content, position effects).</p>
-{pca_html}
-</body></html>""")
-    print(f"wrote {combined_path}")
+    out = out_dir / f"ea_3d_L{LAYER}.html"
+    fig.write_html(out, include_plotlyjs=True)   # embedded -> offline-capable
+    print(f"\nwrote {out}")
 
 
 if __name__ == "__main__":

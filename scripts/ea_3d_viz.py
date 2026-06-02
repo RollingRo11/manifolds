@@ -152,13 +152,14 @@ def main():
 
     pca_path = out_dir / f"ea_3d_L{LAYER}_pca.html"
     save_path = out_dir / f"ea_3d_L{LAYER}_save.html"
-    fig_pca.write_html(pca_path, include_plotlyjs="cdn")
-    fig_save.write_html(save_path, include_plotlyjs="cdn")
+    # include_plotlyjs=True embeds plotly.js inline -> self-contained / offline.
+    fig_pca.write_html(pca_path, include_plotlyjs=True)
+    fig_save.write_html(save_path, include_plotlyjs=True)
     print(f"\nwrote {pca_path}")
     print(f"wrote {save_path}")
 
     combined_path = out_dir / f"ea_3d_L{LAYER}_combined.html"
-    pca_html = fig_pca.to_html(include_plotlyjs="cdn", full_html=False)
+    pca_html = fig_pca.to_html(include_plotlyjs=True, full_html=False)
     save_html = fig_save.to_html(include_plotlyjs=False, full_html=False)
     combined_path.write_text(f"""<!doctype html><html><head>
 <title>EA 3D manifold L{LAYER}</title>

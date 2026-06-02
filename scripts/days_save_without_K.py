@@ -131,7 +131,7 @@ def main():
         scene=dict(xaxis_title="SAVE dir 0", yaxis_title="SAVE dir 1", zaxis_title="SAVE dir 2"),
         width=1000, height=780,
     )
-    fig.write_html(OUT_DIR / "days_save_3d.html", include_plotlyjs="cdn")
+    fig.write_html(OUT_DIR / "days_save_3d.html", include_plotlyjs=True)
 
     # Silhouette plot
     import matplotlib

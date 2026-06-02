@@ -1,0 +1,1346 @@
+[
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 6,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 8,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 10,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 12,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 15,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 20,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 30,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 6,
+    "eigengap_K": 5
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 8,
+    "eigengap_K": 5
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 10,
+    "eigengap_K": 12
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 12,
+    "eigengap_K": 5
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 15,
+    "eigengap_K": 5
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 20,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 30,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 6,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 8,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 10,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 12,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 15,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 20,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 30,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 6,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 8,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 10,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 12,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 15,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 20,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 30,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 6,
+    "eigengap_K": 10
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 8,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 10,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 12,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 15,
+    "eigengap_K": 6
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 20,
+    "eigengap_K": 6
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 30,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 6,
+    "eigengap_K": 4
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 8,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 10,
+    "eigengap_K": 3
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 12,
+    "eigengap_K": 3
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 15,
+    "eigengap_K": 3
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 20,
+    "eigengap_K": 3
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 30,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 6,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 8,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 10,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 12,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 15,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 20,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 30,
+    "eigengap_K": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 6,
+    "eigengap_K": 5
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 8,
+    "eigengap_K": 4
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 10,
+    "eigengap_K": 4
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 12,
+    "eigengap_K": 4
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 15,
+    "eigengap_K": 4
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 20,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 30,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 6,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 8,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 10,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 12,
+    "eigengap_K": 9
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 15,
+    "eigengap_K": 9
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 20,
+    "eigengap_K": 10
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 30,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 6,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 8,
+    "eigengap_K": 4
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 10,
+    "eigengap_K": 4
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 12,
+    "eigengap_K": 4
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 15,
+    "eigengap_K": 4
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 20,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 30,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 6,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 8,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 10,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 12,
+    "eigengap_K": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 15,
+    "eigengap_K": 9
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 20,
+    "eigengap_K": 10
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 1,
+    "k_nn": 30,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 6,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 8,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 10,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 12,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 15,
+    "eigengap_K": 4
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 20,
+    "eigengap_K": 1
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "rm_top": 2,
+    "k_nn": 30,
+    "eigengap_K": 1
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 6,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 8,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 10,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 12,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 15,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 20,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 30,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 6,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 8,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 10,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 12,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 15,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 20,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 30,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 6,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 8,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 10,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 12,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 15,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 20,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 30,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 6,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 8,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 10,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 12,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 15,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 20,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 30,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 6,
+    "eigengap_K": 13
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 8,
+    "eigengap_K": 20
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 10,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 12,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 15,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 20,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 30,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 6,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 8,
+    "eigengap_K": 16
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 10,
+    "eigengap_K": 18
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 12,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 15,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 20,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 30,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 6,
+    "eigengap_K": 13
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 8,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 10,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 12,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 15,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 20,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 30,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 6,
+    "eigengap_K": 13
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 8,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 10,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 12,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 15,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 20,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 30,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 6,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 8,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 10,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 12,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 15,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 20,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 30,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 6,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 8,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 10,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 12,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 15,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 20,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 30,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 6,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 8,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 10,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 12,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 15,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 20,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 1,
+    "k_nn": 30,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 6,
+    "eigengap_K": 12
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 8,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 10,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 12,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 15,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 20,
+    "eigengap_K": 24
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "rm_top": 2,
+    "k_nn": 30,
+    "eigengap_K": 24
+  }
+]

@@ -108,6 +108,49 @@ def layer_fig():
     print(f"wrote {stem}.png / .svg")
 
 
+def eigengap_L40_fig():
+    """Eigengap at L40 (the viz layer) after removing the top global PC,
+    rm_top1 + k_nn=30. Honest: months is a clean K-free recovery; days is a
+    marginal 7-vs-8 call."""
+    spec = json.load(open(DIR / "bin_count_final_L40_spectra.json"))
+    panels = [("weekday_rmtop1_knn30", 7, "Days — layer 40",
+               "gap → 7 (marginal: reads 8<br>at smaller neighborhoods)"),
+              ("month_rmtop1_knn30", 12, "Months — layer 40",
+               "gap → 12 (robust across<br>layers & neighborhoods)")]
+    fig = make_subplots(rows=1, cols=2, horizontal_spacing=0.12,
+                        subplot_titles=tuple(p[2] for p in panels))
+    for col, (key, K, _title, note) in enumerate(panels, start=1):
+        ev = np.array(spec[key]); n = K + 4
+        colors = [HI if i < K else BASE for i in range(n)]
+        fig.add_trace(go.Scatter(
+            x=list(range(n)), y=ev[:n], mode="markers+lines",
+            marker=dict(size=9, color=colors), line=dict(color="#ccc", width=1),
+            showlegend=False, hovertemplate="λ[%{x}]=%{y:.4f}<extra></extra>"),
+            row=1, col=col)
+        fig.add_vline(x=K - 0.5, line=dict(color=HI, dash="dash", width=2),
+                      row=1, col=col)
+        fig.add_annotation(row=1, col=col, x=K - 0.5, y=ev[n - 1] * 0.55, text=note,
+                           showarrow=True, arrowhead=2, ax=55, ay=-20,
+                           font=dict(size=12, color=HI), align="left")
+        fig.update_xaxes(title_text="eigenvalue index  i", row=1, col=col,
+                         dtick=2, showgrid=False)
+        fig.update_yaxes(title_text="Laplacian eigenvalue λ", row=1, col=col,
+                         gridcolor="#eee")
+    fig.update_layout(
+        title=dict(text="Bin count at the L40 visualization layer — eigengap after "
+                        "removing the top global PC (no K supplied)",
+                   x=0.5, xanchor="center", font=dict(size=15)),
+        width=1150, height=460, margin=dict(l=70, r=30, t=80, b=55),
+        plot_bgcolor="white")
+    for a in fig.layout.annotations[:2]:
+        a.font = dict(size=14)
+    stem = DIR / "eigengap_bins_L40"
+    fig.write_image(f"{stem}.png", scale=2)
+    fig.write_image(f"{stem}.svg")
+    print(f"wrote {stem}.png / .svg")
+
+
 if __name__ == "__main__":
     eigengap_fig()
     layer_fig()
+    eigengap_L40_fig()

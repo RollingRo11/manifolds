@@ -191,8 +191,49 @@ def prediction_strength_L40_fig():
     print(f"wrote {stem}.png / .svg")
 
 
+def simple_rule_layers_fig():
+    """Recovered K vs layer for the simplest robust rule: silhouette on
+    unit-normalized + top-PC-removed activations. Exact for both concepts
+    through L40; degrades only in the deepest layers."""
+    res = json.load(open(DIR / "bin_count_simple_results.json"))
+    col = "sil_unitnorm_rm_top1"
+    layers = sorted({r["layer"] for r in res})
+    fig = go.Figure()
+    for fam, color, sym, nm, K in [("weekday", "#4c78a8", "circle", "days (K=7)", 7),
+                                   ("month", "#e45756", "square", "months (K=12)", 12)]:
+        y = [next(r[col] for r in res if r["family"] == fam and r["layer"] == L)
+             for L in layers]
+        # filled markers where exact, hollow where off
+        mc = [color if v == K else "white" for v in y]
+        fig.add_hline(y=K, line=dict(color=color, dash="dot", width=1.5))
+        fig.add_trace(go.Scatter(
+            x=layers, y=y, mode="markers+lines", name=nm,
+            line=dict(color=color, width=2),
+            marker=dict(size=13, color=mc, symbol=sym,
+                        line=dict(color=color, width=2)),
+            hovertemplate=f"{nm}<br>L%{{x}}: recovered K=%{{y}}<extra></extra>"))
+    fig.add_vrect(x0=14, x1=41, fillcolor="#2ca02c", opacity=0.06, line_width=0,
+                  annotation_text="exact for both (incl. L40 viz layer)",
+                  annotation_position="top left",
+                  annotation_font=dict(size=12, color="#2ca02c"))
+    fig.update_xaxes(title_text="layer", dtick=8, showgrid=False)
+    fig.update_yaxes(title_text="recovered K  (filled = exact)", gridcolor="#eee",
+                     dtick=2)
+    fig.update_layout(
+        title=dict(text="Simplest robust rule: silhouette on unit-norm + top-PC-"
+                        "removed acts — exact K at every layer through L40 (no K supplied)",
+                   x=0.5, xanchor="center", font=dict(size=14)),
+        width=1050, height=470, margin=dict(l=70, r=30, t=70, b=55),
+        plot_bgcolor="white", legend=dict(x=0.01, y=0.99))
+    stem = DIR / "simple_rule_layers"
+    fig.write_image(f"{stem}.png", scale=2)
+    fig.write_image(f"{stem}.svg")
+    print(f"wrote {stem}.png / .svg")
+
+
 if __name__ == "__main__":
     eigengap_fig()
     layer_fig()
     eigengap_L40_fig()
     prediction_strength_L40_fig()
+    simple_rule_layers_fig()

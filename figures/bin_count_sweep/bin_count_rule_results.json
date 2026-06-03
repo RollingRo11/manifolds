@@ -1,0 +1,122 @@
+[
+  {
+    "family": "weekday",
+    "layer": 16,
+    "true_K": 7,
+    "silhouette": 7,
+    "calinski_harabasz": 7,
+    "davies_bouldin": 9,
+    "gap_statistic": 10,
+    "prediction_strength": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 24,
+    "true_K": 7,
+    "silhouette": 7,
+    "calinski_harabasz": 7,
+    "davies_bouldin": 7,
+    "gap_statistic": 7,
+    "prediction_strength": 2
+  },
+  {
+    "family": "weekday",
+    "layer": 32,
+    "true_K": 7,
+    "silhouette": 7,
+    "calinski_harabasz": 7,
+    "davies_bouldin": 7,
+    "gap_statistic": 7,
+    "prediction_strength": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 40,
+    "true_K": 7,
+    "silhouette": 7,
+    "calinski_harabasz": 7,
+    "davies_bouldin": 7,
+    "gap_statistic": 7,
+    "prediction_strength": 7
+  },
+  {
+    "family": "weekday",
+    "layer": 48,
+    "true_K": 7,
+    "silhouette": 8,
+    "calinski_harabasz": 8,
+    "davies_bouldin": 9,
+    "gap_statistic": 8,
+    "prediction_strength": 8
+  },
+  {
+    "family": "weekday",
+    "layer": 56,
+    "true_K": 7,
+    "silhouette": 8,
+    "calinski_harabasz": 8,
+    "davies_bouldin": 9,
+    "gap_statistic": 9,
+    "prediction_strength": 8
+  },
+  {
+    "family": "month",
+    "layer": 16,
+    "true_K": 12,
+    "silhouette": 15,
+    "calinski_harabasz": 22,
+    "davies_bouldin": 15,
+    "gap_statistic": 19,
+    "prediction_strength": 10
+  },
+  {
+    "family": "month",
+    "layer": 24,
+    "true_K": 12,
+    "silhouette": 13,
+    "calinski_harabasz": 23,
+    "davies_bouldin": 13,
+    "gap_statistic": 24,
+    "prediction_strength": 12
+  },
+  {
+    "family": "month",
+    "layer": 32,
+    "true_K": 12,
+    "silhouette": 18,
+    "calinski_harabasz": 24,
+    "davies_bouldin": 18,
+    "gap_statistic": 24,
+    "prediction_strength": 12
+  },
+  {
+    "family": "month",
+    "layer": 40,
+    "true_K": 12,
+    "silhouette": 15,
+    "calinski_harabasz": 22,
+    "davies_bouldin": 15,
+    "gap_statistic": 24,
+    "prediction_strength": 12
+  },
+  {
+    "family": "month",
+    "layer": 48,
+    "true_K": 12,
+    "silhouette": 16,
+    "calinski_harabasz": 24,
+    "davies_bouldin": 16,
+    "gap_statistic": 24,
+    "prediction_strength": 11
+  },
+  {
+    "family": "month",
+    "layer": 56,
+    "true_K": 12,
+    "silhouette": 20,
+    "calinski_harabasz": 24,
+    "davies_bouldin": 20,
+    "gap_statistic": 24,
+    "prediction_strength": 10
+  }
+]

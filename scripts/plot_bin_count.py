@@ -150,7 +150,49 @@ def eigengap_L40_fig():
     print(f"wrote {stem}.png / .svg")
 
 
+def prediction_strength_L40_fig():
+    """Prediction strength vs K at L40 (viz layer), cleaned representation.
+    Recovered K = largest K with PS >= 0.8. Recovers days=7 AND months=12."""
+    cur = json.load(open(DIR / "bin_count_rule_L40_curves.json"))
+    THR = 0.8
+    fig = make_subplots(rows=1, cols=2, horizontal_spacing=0.12,
+                        subplot_titles=("Days — layer 40", "Months — layer 40"))
+    for col, fam in enumerate(["weekday", "month"], start=1):
+        ps = cur[fam]["prediction_strength"]; K = cur[fam]["true_K"]
+        ks = sorted(int(k) for k in ps); y = [ps[str(k)] for k in ks]
+        recovered = max([k for k in ks if ps[str(k)] >= THR])
+        colors = [HI if k == recovered else (BASE if ps[str(k)] >= THR else GREY)
+                  for k in ks]
+        fig.add_trace(go.Bar(x=ks, y=y, marker_color=colors, showlegend=False,
+                             hovertemplate="K=%{x}: PS=%{y:.2f}<extra></extra>"),
+                      row=1, col=col)
+        fig.add_hline(y=THR, line=dict(color="#888", dash="dash", width=1.5),
+                      annotation_text="PS = 0.8", annotation_position="top left",
+                      row=1, col=col)
+        fig.add_annotation(row=1, col=col, x=recovered, y=ps[str(recovered)],
+                           text=f"largest stable K → {recovered} bins",
+                           showarrow=True, arrowhead=2, ax=60, ay=55,
+                           font=dict(size=13, color=HI), align="left")
+        fig.update_xaxes(title_text="number of clusters K", row=1, col=col,
+                         dtick=2, showgrid=False)
+        fig.update_yaxes(title_text="prediction strength", row=1, col=col,
+                         range=[0, 1.05], gridcolor="#eee")
+    fig.update_layout(
+        title=dict(text="Bin count at L40 via prediction strength "
+                        "(largest K that clusters stably) — no K supplied",
+                   x=0.5, xanchor="center", font=dict(size=15)),
+        width=1150, height=460, margin=dict(l=70, r=30, t=80, b=55),
+        plot_bgcolor="white")
+    for a in fig.layout.annotations[:2]:
+        a.font = dict(size=14)
+    stem = DIR / "prediction_strength_L40"
+    fig.write_image(f"{stem}.png", scale=2)
+    fig.write_image(f"{stem}.svg")
+    print(f"wrote {stem}.png / .svg")
+
+
 if __name__ == "__main__":
     eigengap_fig()
     layer_fig()
     eigengap_L40_fig()
+    prediction_strength_L40_fig()

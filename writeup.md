@@ -90,6 +90,49 @@ Two checks.
 
 Neither metric is needed in deployment — they're for *validating* the method on cases where you have ground truth. In the wild (unknown probe, unknown manifold), you'd run SAVE, look at the eigenvalue spectrum to see if the probe has signal, and read the embedding directly.
 
+## Discovering how many bins the manifold has
+
+SAVE hands you the manifold from a single probe. But there's a second thing you'd want for free: **how many distinct states does the manifold support?** Seven weekdays, twelve months, twenty-four letters. If the method is really unsupervised, you shouldn't have to tell it the count — you should be able to read it off.
+
+**The tempting dead end: the SAVE eigenvalue spectrum.** The natural guess is that the SAVE eigenvalues already encode the count — find the sharp drop `λᵢ / λᵢ₊₁` and call that index the number of bins. It doesn't work. The SAVE spectrum decays *smoothly*: on months the largest ratio is just `λ₀/λ₁` (which would claim "1 bin"), and a random probe produces the same leading-gap shape. The reason is conceptual. The `λ₁`-vs-random test above tells you *whether the probe found structure*; it does **not** tell you how many states that structure has, because **SAVE eigenvalues measure the intrinsic *dimension* of the manifold, not the number of points on it.** Seven weekdays arranged on a curved ring is a ~2–3 dimensional object — there's no reason for an eigenvalue gap to appear at 7. "How many bins" is a *clustering* question, and it has to be treated as one.
+
+**The right frame: count the clusters — but clean the activations first.** The concept tokens *do* form discrete clusters (one blob per weekday), so the count is just "how many blobs are there." The catch is that at deep layers the blobs smear together: at L40 — our steering/visualization layer — k-means against the held-out labels scores only ARI ≈ 0.73, because two nuisance signals dominate the raw activations. One is the transformer's *massive activations* (a few dimensions with enormous magnitude). The other is a *shared context direction* (the carrier-phrase variation that's common to every concept). Strip both and the blobs snap back: cluster recovery jumps to ARI ≈ 1.0.
+
+The recipe, start to finish, with no `K` supplied anywhere:
+
+```
+# X : N × d last-token activations for one concept family
+X = X / norm(X, axis=1)          # 1. unit-normalize → cosine space (kills massive-activation magnitude)
+X = X - mean(X, axis=0)
+v1 = top right singular vector of X
+X = X - (X @ v1) v1ᵀ             # 2. project out the top global PC (the shared context direction)
+X = PCA(X, 20)                   # 3. down to a workable subspace
+for K in 2 .. 2·K_max:           # 4. silhouette over candidate counts
+    score[K] = silhouette(X, kmeans(X, K))
+n_bins = argmax(score)           #    the count is the most cohesive K
+```
+
+One normalization, one rank-1 projection, and an off-the-shelf silhouette argmax. The cleaning is what makes the simple criterion work: on raw or under-cleaned activations, silhouette *over-splits* months (it picks 15–22, latching onto fine sub-structure that doesn't reproduce); on the cleaned cosine-space representation that sub-structure collapses and silhouette lands exactly on the concept count.
+
+**It works at every layer through the one we visualize.** Recovered count vs. layer, no `K` given:
+
+| layer | 16 | 24 | 32 | **40** | 48 | 56 |
+|---|---|---|---|---|---|---|
+| days (true 7) | 7 | 7 | 7 | **7** | 9 | 9 |
+| months (true 12) | 12 | 12 | 12 | **12** | 12 | 19 |
+
+Exact for both, with no supervision, at every layer from L16 through **L40 — the same layer the manifolds are visualized at**. So the pipeline is honestly unsupervised end to end: you never tell it there are seven days.
+
+![Recovered bin count vs layer — silhouette on cleaned activations](figures/bin_count_sweep/simple_rule_layers.png)
+
+**If you want the count to fall out of a spectrum**, use the graph-Laplacian eigengap rather than the SAVE matrix (this is the principled eigenvalue-based cluster counter — the eigengap of a kNN affinity graph). At L16 it's textbook: the first 7 (days) / 12 (months) Laplacian eigenvalues sit at ≈ 0, then jump ~40×. The number of near-zero eigenvalues *is* the number of clusters — ARI 1.00, no `K`.
+
+![Laplacian eigengap at L16 — K near-zero eigenvalues then a jump](figures/bin_count_sweep/eigengap_bins.png)
+
+The eigengap is the prettiest diagnostic but the least portable across layers: by L40 the days have relaxed into a *connected* curved manifold (still perfectly k-means-separable, but not graph-disconnected), so the eigengap counts components and reads 8 instead of 7. Months stay more cluster-like, so the eigengap still nails 12 there. If you specifically need an exact count at L40 for *both*, the most robust single rule is **prediction strength** — the largest `K` whose clustering reproduces on held-out halves — which recovers 7 and 12 at L40, at the cost of being more involved than a silhouette argmax.
+
+**Honest limits.** None of these rules survives the final two layers (L48–L56): days drifts to 8–9, months eventually to 19. That isn't a failure of the count rule — it's the model itself blurring discrete concept identity as the last layers transition toward emitting output tokens. Concept structure is sharpest in the middle of the network, which is exactly where you'd want to read or steer it. Within that usable band (L16–L40), the simple recipe above recovers the number of bins for free — closing the loop on "unsupervised": one binary probe gives you the manifold, and the activations themselves tell you how many states it has.
+
 ## Generalizing to other geometries
 
 The weekday cycle isn't a special case. We've validated SAVE on the full battery of manifolds from the paper (Llama-3.1-8B base, paper-faithful prompts):
